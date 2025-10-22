@@ -1,175 +1,437 @@
-# 📱 MODE PAYSAGE - OPTIMISATIONS
+:root {
+	/* Old Color Scheme
+	--bgColor: rgba(205, 205, 205, 1);
+	--innerMenuBgColor: rgba(225, 225, 225, 1);
+	--sliderBgColor: rgba(245, 245, 245, 1);
+	--fontColor: rgba(25, 25, 25, 1);
+	--buttonFontColor: #424242;
+	--buttonBgColor: #9e9e9e;
+	--buttonActiveBgColor: #d3d3d3;
+	--buttonHoverBgColor: #c9c9c9;
+	--borderColor: rgba(0, 0, 0, 0.5); */
 
-## ✅ CE QUI A ÉTÉ FAIT :
+	--bgColor: #424242;
+	--innerMenuBgColor: #424242;
+	--lightInnerMenuHoverBgColor: #4e4e4e;
 
-Le nouveau **Interface.css** contient des règles spéciales pour le mode paysage mobile :
+	--inputBgColor: #757575;
+	--inputFontColor: #eeeeee;
 
-### 🎯 Changements en mode paysage :
+	--fontColor: #bdbdbd;
+	--fontWeightedColor: #d3d3d3;
+	--fontWeakenedColor: #8a8a8a;
 
-1. **Navbar ultra-compacte** : 50px au lieu de 150px
-2. **Boutons très petits** : 0.7em (au lieu de 1em)
-3. **Espacement réduit** : gaps minimaux
-4. **Textes compacts** : 75% de la taille normale
-5. **Progress bar plus fine** : 2px au lieu de 4px
-6. **Menu latéral adapté** : 95% de largeur
+	--buttonFontColor: #bdbdbd;
+	--buttonBgColor: #494949;
+	--buttonActiveBgColor: #757575;
+	--buttonHoverBgColor: #494949;
+	--buttonHoverFontColor: #dfdfdf;
 
-### 📏 Détection automatique :
+	--borderColor: #616161;
+}
 
-Le CSS détecte automatiquement :
-- Orientation paysage (`orientation: landscape`)
-- Hauteur < 500px (`max-height: 500px`)
-- Pour les TRÈS petits écrans : hauteur < 400px
-
----
-
-## 🛠️ INSTALLATION :
-
-1. **Remplace `css/Interface.css`** par le nouveau fichier
-2. **Vide le cache mobile** (voir instructions ci-dessous)
-3. **Recharge en mode paysage**
-
-### Vider le cache mobile :
-
-**Android (Chrome/Firefox) :**
-1. Menu (3 points) → Paramètres
-2. Confidentialité → Effacer données de navigation
-3. Cocher "Images et fichiers en cache"
-4. Période : "Depuis toujours"
-5. Effacer
-
-**iOS (Safari) :**
-1. Réglages → Safari
-2. Effacer historique et données de sites
-
-**OU PLUS SIMPLE :**
-- Ferme complètement l'app du navigateur
-- Force-quitter l'application
-- Rouvre et recharge le site
-
----
-
-## 🎨 SI C'EST ENCORE TROP GRAND :
-
-Tu peux réduire encore plus en modifiant ces valeurs dans **Interface.css** :
-
-### Ligne ~485 (section PAYSAGE) :
-
-```css
-/* Navbar encore plus petite */
+html,
+body {
+	font-family: "Source Sans Pro", sans-serif !important;
+	color: var(--fontColor);
+	width: 100%;
+	height: 100%;
+	min-width: 1040px;
+	min-height: 100%;
+}
+body {
+	overflow-y: hidden;
+	overflow-x: auto;
+	margin: 0;
+	padding: 0;
+}
+.pcr-app:not(.visible) {
+	display: none;
+}
 .navbar {
-    max-height: 40px !important;  /* ← Change de 50 à 40 */
+	box-sizing: border-box;
+	transition: all 0.4s ease-out;
+	max-height: 150px;
+	background-color: var(--bgColor);
+	padding: 0.5em;
+}
+#minimizeMenu {
+	position: absolute;
+	right: 5px;
+	transition: all 0.4s ease-out;
+	cursor: pointer;
+}
+.zoomGroup {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+}
+.zoomGroup:hover,
+.pianoCanvas:hover ~ .zoomGroup {
+	z-index: 1055;
+}
+canvas {
+	z-index: -5;
+}
+#progressBarCanvas {
+	transition: all 0.4s ease-out;
+	background-color: var(--inputBgColor);
+	box-sizing: border-box;
+	left: 0px;
+	position: absolute;
+	border-bottom: 4px solid var(--borderColor);
+	float: left;
+	cursor: pointer;
+	z-index: 10;
 }
 
-/* Boutons encore plus petits */
+.row {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+}
+.forcedThinButton {
+	width: 60px !important;
+}
+.innerMenuDivsContainer {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	min-width: 1040px;
+	background-color: rgba(0, 0, 0, 0);
+	pointer-events: none;
+	overflow: none;
+}
+.innerMenuDiv {
+	margin-top: 24px;
+	position: absolute;
+	box-sizing: border-box;
+	pointer-events: all;
+	z-index: 100;
+
+	width: 30%;
+	height: 100%;
+	min-width: 300px;
+	right: 0px;
+	padding: 5px;
+
+	background-color: var(--bgColor);
+	box-shadow: -3px 3px 10px 1px rgb(0 0 0, 0.5);
+
+	overflow-y: auto;
+	overflow-x: hidden;
+
+	transition: all 0.25s ease-out;
+}
+.innerMenuDiv.hidden {
+	/* right: -30%; */
+}
+
+.innerMenuContDiv:first-of-type {
+	border-top: none;
+}
+.innerMenuContDiv {
+	background-color: var(--innerMenuBgColor);
+	background-image: var(--navBackground);
+	color: var(--buttonFontColor);
+	border-top: 1px solid var(--borderColor);
+	border-radius: 2px;
+	/* padding: 5px;
+	margin: 5px; */
+	box-sizing: border-box;
+	overflow: hidden;
+
+	transition: 0.3s all ease-out;
+}
+.innerMenuContDiv.collapsed {
+	max-height: 2em;
+}
+.clickableTitle:not(.glyphicon) {
+	position: relative;
+	padding-left: 5px;
+	height: 2em;
+	box-sizing: border-box;
+}
+.clickableTitle:hover {
+	background-color: var(--lightInnerMenuHoverBgColor);
+}
+.collapserGlyphSpan {
+	font-size: 1em;
+	position: absolute !important;
+	top: 0.5em !important;
+	height: 14px;
+	right: 8px;
+}
+.centeredMenuDiv {
+	background-color: var(--bgColor);
+	max-height: calc(50% - 50px);
+	top: 24px;
+	padding: 2em;
+	position: absolute;
+	width: 50%;
+	left: 25%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	border-radius: 5px;
+	transition: all 0.3s ease-out;
+}
+.notification {
+	background-color: var(--bgColor);
+	max-height: calc(50% - 50px);
+	top: 30%;
+	padding: 30px;
+	position: absolute;
+	width: 50%;
+	left: 25%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	border-radius: 5px;
+}
+.highlighted {
+	animation: pulse 1.5s infinite;
+	box-shadow: 0em 0em 5px 5px rgba(0, 0, 0, 0.8);
+}
+
+@-webkit-keyframes pulse {
+	0% {
+		-webkit-box-shadow: 0 0 0 0 rgba(10, 141, 228, 0.4);
+	}
+	50% {
+		-webkit-box-shadow: 0 0 0 10px rgba(10, 141, 228, 0.4);
+	}
+	100% {
+		-webkit-box-shadow: 0 0 0 0 rgba(10, 141, 228, 0.4);
+	}
+}
+@keyframes pulse {
+	0% {
+		-moz-box-shadow: 0 0 0 0 rgba(10, 141, 228, 0.4);
+		box-shadow: 0 0 0 0 rgba(10, 141, 228, 0.4);
+	}
+	50% {
+		-moz-box-shadow: 0 0 0 10px rgba(10, 141, 228, 0.4);
+		box-shadow: 0 0 0 10px rgba(10, 141, 228, 0.4);
+	}
+	100% {
+		-moz-box-shadow: 0 0 0 0 rgba(10, 141, 228, 0.4);
+		box-shadow: 0 0 0 0 rgba(10, 141, 228, 0.4);
+	}
+}
+
+.centeredBigText {
+	width: 100%;
+	text-align: center;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+.trackName {
+	width: 100%;
+	padding-top: 0.1em;
+	font-size: 0.8em;
+}
+.instrumentName {
+	width: 100%;
+	text-align: left;
+	font-size: 0.7em;
+	padding-left: 0.2em;
+}
+.divider {
+	border: 0;
+	border: 1px solid var(--buttonColor);
+}
+
+.floatSpanLeft span {
+	float: left;
+	margin-right: 2px;
+}
+.container {
+	width: 100% !important;
+	display: flex;
+}
+.halfContainer {
+	width: 50% !important;
+	float: left;
+}
+.row {
+	width: 100%;
+	margin: 0;
+}
+.col {
+	justify-content: space-between !important;
+}
+.btn-group {
+	align-self: auto;
+}
+.btn-group-vertical {
+	display: flex;
+	flex-direction: column;
+}
 .btn {
-    font-size: 0.6em;  /* ← Change de 0.7 à 0.6 */
-}
+	position: relative;
+	box-sizing: border-box;
 
+	padding: 0.5em;
+
+	text-align: center;
+	font-size: 1em;
+	font-weight: normal !important;
+
+	color: var(--buttonFontColor);
+	background-color: var(--buttonBgColor);
+
+	outline: none;
+	border-radius: 1px;
+	border: 1px solid rgba(0, 0, 0, 0);
+
+	transition: all 0.15s ease-out;
+
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none;
+}
+.btn:hover:active {
+	background-color: var(--buttonActiveBgColor);
+}
+.btn:hover {
+	background-color: var(--buttonHoverBgColor);
+	color: var(--buttonHoverFontColor);
+	border: 1px solid var(--borderColor);
+}
+.btn-select-line {
+	border-bottom: 4px solid #607d8b;
+	transition: all 0.15s ease-out;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0%;
+	opacity: 0;
+}
+.btn.selected {
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+.btn.selected .btn-select-line {
+	opacity: 1;
+	width: 100%;
+}
 .btn-lg {
-    font-size: 0.8em !important;  /* ← Change de 0.9 à 0.8 */
+	font-size: 1.5em;
+	margin-left: 0.2em;
+	margin-right: 0.2em;
 }
-```
-
----
-
-## 💡 OPTION : MASQUER LE MENU EN PAYSAGE PAR DÉFAUT
-
-Si tu veux que le menu soit **minimisé automatiquement** en mode paysage, ajoute dans **UI.js** :
-
-### Dans le constructeur de la classe UI :
-
-```javascript
-constructor(render, isMobile) {
-    // ... code existant ...
-    
-    // Auto-minimiser en paysage
-    window.addEventListener('orientationchange', () => {
-        setTimeout(() => {
-            if (window.innerHeight < window.innerWidth && window.innerHeight < 500) {
-                // Mode paysage détecté - minimiser le menu
-                if (!this.navMinimized) {
-                    this.getMinimizeButton().click()
-                }
-            }
-        }, 100)
-    })
+.btn span {
+	font-size: 1em;
 }
-```
-
-Cela minimisera automatiquement la navbar quand l'utilisateur passe en mode paysage !
-
----
-
-## 🔍 VÉRIFICATION :
-
-Pour vérifier que ça marche :
-
-1. **Ouvre le site en mode paysage**
-2. **Regarde la navbar** : elle devrait faire ~50px de haut (très petite)
-3. **Regarde les boutons** : ils devraient être beaucoup plus petits
-4. **Teste la visibilité du piano** : il devrait être visible en entier
-
----
-
-## 📐 DIMENSIONS TYPIQUES :
-
-| Mode | Navbar | Boutons | Piano visible ? |
-|------|--------|---------|-----------------|
-| Portrait mobile | 100px | Normal | ✅ Oui |
-| Paysage mobile | 50px | Petit | ✅ Devrait l'être |
-| Desktop | 150px | Normal | ✅ Oui |
-
----
-
-## 🐛 SI ÇA NE MARCHE TOUJOURS PAS :
-
-### 1. Vérifie que le cache est bien vidé
-```
-Sur mobile, le cache est TRÈS persistant !
-Essaye de forcer le rechargement plusieurs fois.
-```
-
-### 2. Vérifie que le bon CSS est chargé
-```
-Ouvre les outils dev mobile (si possible) et regarde
-si les media queries sont appliquées.
-```
-
-### 3. Prends une capture d'écran
-```
-Envoie-moi une capture du problème en mode paysage
-pour que je voie exactement ce qui ne va pas !
-```
-
----
-
-## 🎯 ALTERNATIVE : CACHER DES ÉLÉMENTS EN PAYSAGE
-
-Si c'est encore trop chargé, on peut **masquer** certains éléments en paysage.
-
-### Ajoute dans Interface.css (section paysage) :
-
-```css
-@media only screen and (max-height: 500px) and (orientation: landscape) {
-    /* Masquer le volume slider en paysage */
-    #volumeMain {
-        display: none !important;
-    }
-    
-    /* Masquer le speed control en paysage */
-    .speedDiv {
-        display: none !important;
-    }
-    
-    /* Masquer le bouton settings en paysage */
-    #settingsButton {
-        display: none !important;
-    }
+.pcr-button {
+	opacity: 0;
+	position: absolute;
 }
-```
 
-Cela cachera les éléments moins essentiels pour gagner de la place !
+.topContainer {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
----
+.topContainer:first-child {
+	margin-right: auto;
+	justify-content: space-between !important;
+	align-items: unset;
+}
 
-**Essaye avec le nouveau CSS et dis-moi si c'est mieux !** 🚀
+.topContainer:last-child {
+	margin-left: auto;
+	justify-content: space-between !important;
+	align-items: unset;
+}
+
+.vertical-align {
+	display: flex;
+	align-items: center;
+}
+.hidden {
+	visibility: hidden;
+	opacity: 0;
+	pointer-events: none;
+}
+.unhidden {
+	visibility: visible;
+	opacity: 1;
+}
+.fullscreen {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.fullscreen p {
+	color: var(--inputBgColor);
+	text-align: center;
+	position: fixed;
+	z-index: 999;
+	overflow: show;
+	margin: auto;
+	top: 11.5em;
+	font-size: 1.5em;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	height: 50px;
+}
+
+.floatLeft {
+	float: left;
+}
+.loadingDiv {
+	text-align: left;
+}
+/* Loading Spinner */
+.loader,
+.loader:after {
+	position: fixed;
+	z-index: 999;
+	overflow: show;
+	margin: auto;
+	top: 150px;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	width: 10em;
+	height: 10em;
+}
+.loader {
+	font-size: 0.5em;
+	border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+	border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+	border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+	border-left: 1.1em solid #ffffff;
+	-webkit-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-animation: load8 1.1s infinite linear;
+	animation: load8 1.1s infinite linear;
+}
+@-webkit-keyframes load8 {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+@keyframes load8 {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
