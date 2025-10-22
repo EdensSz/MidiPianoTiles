@@ -61,7 +61,6 @@ export class UI {
 	createControlMenu() {
 		let topGroupsContainer = DomHelper.createDivWithClass("container")
 
-		let fileGrp = this.getFileButtonGroup()
 		let songSpeedGrp = this.getSpeedButtonGroup()
 		let songControlGrp = this.getSongControlButtonGroup()
 		let volumeGrp = this.getVolumneButtonGroup()
@@ -69,7 +68,6 @@ export class UI {
 		let trackGrp = this.getTracksButtonGroup()
 
 		DomHelper.addClassToElements("align-middle", [
-			fileGrp,
 			songSpeedGrp,
 			songControlGrp,
 			volumeGrp,
@@ -163,9 +161,7 @@ export class UI {
 	getTracksButtonGroup() {
 		let trackGrp = DomHelper.createButtonGroup(true)
 		DomHelper.appendChildren(trackGrp, [
-			
 			this.getMidiSetupButton()
-			// this.getChannelsButton()
 		])
 		return trackGrp
 	}
@@ -194,8 +190,6 @@ export class UI {
 		DomHelper.appendChildren(songSpeedGrp, [this.getSpeedDiv()])
 		return songSpeedGrp
 	}
-
-	
 
 	getNavBar() {
 		if (!this.navBar) {
@@ -278,7 +272,6 @@ export class UI {
 		}
 		return this.fullscreenButton
 	}
-
 	showLoadedSongsDiv() {
 		this.hideAllDialogs()
 		DomHelper.addClassToElement("selected", this.loadedSongsButton)
@@ -459,7 +452,6 @@ export class UI {
 		}
 		return this.speedDownButton
 	}
-
 	hideTracks() {
 		DomHelper.removeClass("selected", this.tracksButton)
 		this.tracksShown = false
