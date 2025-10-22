@@ -435,3 +435,113 @@ canvas {
 		transform: rotate(360deg);
 	}
 }
+
+/* ========================================
+   OPTIMISATIONS MOBILE
+   ======================================== */
+
+@media only screen and (max-width: 768px) {
+	/* Supprimer la largeur minimale sur mobile */
+	html,
+	body {
+		min-width: 100%;
+		overflow-x: hidden;
+	}
+
+	.innerMenuDivsContainer {
+		min-width: 100%;
+	}
+
+	/* Réduire la taille de la navbar sur mobile */
+	.navbar {
+		padding: 0.3em;
+		max-height: 100px;
+	}
+
+	/* Masquer le bouton de zoom sur mobile */
+	.zoomGroup {
+		display: none !important;
+	}
+
+	/* Menu latéral en plein écran sur mobile */
+	.innerMenuDiv {
+		width: 100%;
+		min-width: 100%;
+		margin-top: 12px;
+	}
+
+	/* Réduire la taille des boutons sur mobile */
+	.btn {
+		padding: 0.3em;
+		font-size: 0.85em;
+	}
+
+	.btn-lg {
+		font-size: 1.2em;
+		margin-left: 0.1em;
+		margin-right: 0.1em;
+	}
+
+	/* Réduire l'espacement des containers sur mobile */
+	.topContainer {
+		padding: 0.2em;
+	}
+
+	/* Texte plus petit sur mobile */
+	.centeredBigText {
+		font-size: 0.9em;
+	}
+
+	/* Menus centrés plus larges sur mobile */
+	.centeredMenuDiv {
+		width: 90%;
+		left: 5%;
+		padding: 1em;
+	}
+
+	.notification {
+		width: 90%;
+		left: 5%;
+		padding: 15px;
+	}
+
+	/* Réduire la taille du bouton minimiser */
+	#minimizeMenu {
+		font-size: 0.8em;
+	}
+
+	/* Adapter les sliders sur mobile */
+	.forcedThinButton {
+		width: 50px !important;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	/* Encore plus petit pour les très petits écrans */
+	.navbar {
+		padding: 0.2em;
+		max-height: 80px;
+	}
+
+	.btn {
+		padding: 0.25em;
+		font-size: 0.75em;
+	}
+
+	.btn-lg {
+		font-size: 1em;
+	}
+
+	/* Textes encore plus petits */
+	.centeredBigText {
+		font-size: 0.8em;
+	}
+
+	.trackName {
+		font-size: 0.7em;
+	}
+
+	.instrumentName {
+		font-size: 0.6em;
+	}
+}
