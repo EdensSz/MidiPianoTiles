@@ -79,16 +79,20 @@
 	color: #ff6b85;
 }
 
-/* Décaler le contenu principal pour ne pas être caché par la navbar */
 body.with-pianomaker-navbar {
-	padding-top: 50px;
+	padding-top: 0 !important;
 }
 
-/* Ajuster la navbar existante */
-body.with-pianomaker-navbar .navbar {
-	margin-top: 50px;
+/* Décaler la navbar du player (pas la navbar pianomaker) */
+body.with-pianomaker-navbar .navbar-wrapper,
+body.with-pianomaker-navbar .navbar:not(.pianomaker-navbar) {
+	margin-top: 50px !important;
 }
 
+/* Décaler le progress bar */
+body.with-pianomaker-navbar #progressBarCanvas {
+	top: 50px !important;
+}
 /* Mobile responsive */
 @media only screen and (max-width: 768px) {
 	.pianomaker-navbar {
