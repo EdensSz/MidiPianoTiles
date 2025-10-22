@@ -80,7 +80,7 @@ export class UI {
 		let middleTop = DomHelper.createElementWithClass("topContainer")
 		let rightTop = DomHelper.createElementWithClass("topContainer")
 
-		DomHelper.appendChildren(leftTop, [fileGrp, trackGrp])
+		DomHelper.appendChildren(leftTop, [trackGrp])
 		DomHelper.appendChildren(middleTop, [songControlGrp])
 		DomHelper.appendChildren(rightTop, [
 			songSpeedGrp,
@@ -163,7 +163,7 @@ export class UI {
 	getTracksButtonGroup() {
 		let trackGrp = DomHelper.createButtonGroup(true)
 		DomHelper.appendChildren(trackGrp, [
-			this.getTracksButton(),
+			
 			this.getMidiSetupButton()
 			// this.getChannelsButton()
 		])
@@ -195,14 +195,7 @@ export class UI {
 		return songSpeedGrp
 	}
 
-	getFileButtonGroup() {
-		let fileGrp = DomHelper.createButtonGroup(true)
-		DomHelper.appendChildren(fileGrp, [
-			this.getLoadSongButton(),
-			this.getLoadedSongsButton()
-		])
-		return fileGrp
-	}
+	
 
 	getNavBar() {
 		if (!this.navBar) {
@@ -285,33 +278,7 @@ export class UI {
 		}
 		return this.fullscreenButton
 	}
-	getLoadSongButton() {
-		if (!this.loadSongButton) {
-			this.loadSongButton = DomHelper.createFileInput(
-				"Upload Midi",
-				this.handleFileSelect.bind(this)
-			)
-			DomHelper.addClassToElement("floatSpanLeft", this.loadSongButton)
-		}
-		return this.loadSongButton
-	}
-	getLoadedSongsButton() {
-		if (!this.loadedSongsButton) {
-			this.loadedSongsButton = DomHelper.createGlyphiconTextButton(
-				"mute",
-				"music",
-				"Loaded Songs",
-				ev => {
-					if (this.loadedSongsShown) {
-						this.hideLoadedSongsDiv()
-					} else {
-						this.showLoadedSongsDiv()
-					}
-				}
-			)
-		}
-		return this.loadedSongsButton
-	}
+
 	showLoadedSongsDiv() {
 		this.hideAllDialogs()
 		DomHelper.addClassToElement("selected", this.loadedSongsButton)
@@ -492,24 +459,7 @@ export class UI {
 		}
 		return this.speedDownButton
 	}
-	getTracksButton() {
-		if (!this.tracksButton) {
-			this.tracksButton = DomHelper.createGlyphiconTextButton(
-				"tracks",
-				"align-justify",
-				"Tracks",
-				ev => {
-					if (this.tracksShown) {
-						this.hideTracks()
-					} else {
-						this.showTracks()
-					}
-				}
-			)
-			DomHelper.addClassToElement("floatSpanLeft", this.tracksButton)
-		}
-		return this.tracksButton
-	}
+
 	hideTracks() {
 		DomHelper.removeClass("selected", this.tracksButton)
 		this.tracksShown = false
