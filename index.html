@@ -7,7 +7,7 @@
 	<!-- <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet"> -->
 	
 	
-	<link rel="stylesheet" href="./css/PianoMakerNavbar.css">
+	<link rel="stylesheet" href="./css/PianoMakerNavbar.css"></link>
 	<link rel="preload" href="./css/bootstrap.min.css" as="style"  onload="this.rel='stylesheet'">
 	<link rel="stylesheet" type="text/css" href='./css/Interface.css'></link>
 	<link rel="stylesheet" type="text/css" href='./css/Inputs.css'></link>
@@ -58,5 +58,17 @@
         async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
+<body class="with-pianomaker-navbar">
+<nav class="pianomaker-navbar">
+		<a href="/" class="pianomaker-logo">PianoMaker</a>
+		<ul class="pianomaker-nav-links">
+			<li><a href="/convert" class="pianomaker-nav-link hide-mobile">Convert any song</a></li>
+			<li><a href="/play" class="pianomaker-nav-link">Play any song</a></li>
+			<li><a href="/signup" class="pianomaker-nav-link highlight hide-mobile">Sign up</a></li>
+			<li><a href="/login" class="pianomaker-nav-link highlight">Login</a></li>
+			<li><a href="/ideas" class="pianomaker-nav-link hide-mobile">Repertory of ideas</a></li>
+		</ul>
+	</nav>
+
 </body>
 </html>
