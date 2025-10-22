@@ -52,27 +52,6 @@ const defaultSettings = {
 
 			{
 				type: "checkbox",
-				id: "showBPM",
-				label: "Show BPM",
-				value: true,
-				onChange: ev => setSetting("showBPM", ev.target.checked)
-			},
-			{
-				type: "checkbox",
-				id: "showMiliseconds",
-				label: "Show Miliseconds",
-				value: true,
-				onChange: ev => setSetting("showMiliseconds", ev.target.checked)
-			},
-			{
-				type: "checkbox",
-				id: "showNoteDebugInfo",
-				label: "Enable debug info on hover over note",
-				value: false,
-				onChange: ev => setSetting("showNoteDebugInfo", ev.target.checked)
-			},
-			{
-				type: "checkbox",
 				id: "showMarkersSong",
 				label: "Show markers in the song",
 				value: false,
@@ -85,13 +64,7 @@ const defaultSettings = {
 				value: false,
 				onChange: ev => setSetting("showMarkersTimeline", ev.target.checked)
 			},
-			{
-				type: "checkbox",
-				id: "showFps",
-				label: "Show FPS",
-				value: true,
-				onChange: ev => setSetting("showFps", ev.target.checked)
-			},
+
 			{
 				type: "color",
 				id: "inputNoteColor",
