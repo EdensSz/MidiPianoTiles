@@ -58,31 +58,38 @@
         async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
+<script>
 setTimeout(function() {
-    // Les sliders "undefinedSlider" sont probablement le tempo
     const sliders = document.querySelectorAll('input[id="undefinedSlider"]');
-    
-    // Prendre le PREMIER (généralement le tempo)
-    const tempoSlider = sliders[0];
+    const tempoSlider = sliders[0]; // Premier undefinedSlider
+    let tempoChanges = parseInt(localStorage.getItem('tempoChanges') || '0');
     
     if (tempoSlider) {
-        // Désactiver
-        tempoSlider.disabled = true;
-        tempoSlider.style.opacity = '0.5';
-        tempoSlider.style.cursor = 'not-allowed';
+        // Vérifier si quota atteint
+        if (tempoChanges >= 5) {
+            tempoSlider.disabled = true;
+            tempoSlider.style.opacity = '0.5';
+            alert('⚠️ Vous avez utilisé vos 5 modifications gratuites !');
+        }
         
-        // Pop-up au clic
-        tempoSlider.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('🔒 Créez un compte pour modifier le tempo !\n\nPassez à Premium pour un accès illimité.');
-        });
-        
-        // Empêcher aussi le drag
-        tempoSlider.addEventListener('mousedown', function(e) {
-            e.preventDefault();
-            alert('🔒 Créez un compte pour modifier le tempo !');
+        // Compter les changements
+        tempoSlider.addEventListener('change', function() {
+            if (tempoChanges < 5) {
+                tempoChanges++;
+                localStorage.setItem('tempoChanges', tempoChanges);
+                
+                const remaining = 5 - tempoChanges;
+                if (remaining === 0) {
+                    tempoSlider.disabled = true;
+                    tempoSlider.style.opacity = '0.5';
+                    alert('⚠️ Plus de modifications ! Passez à Premium.');
+                } else {
+                    alert(`✓ Modifié ! ${remaining} restante${remaining > 1 ? 's' : ''}.`);
+                }
+            }
         });
     }
 }, 2000);
+</script>
 </body>
 </html>
