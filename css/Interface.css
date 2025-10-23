@@ -10,7 +10,7 @@
 	--buttonHoverBgColor: #c9c9c9;
 	--borderColor: rgba(0, 0, 0, 0.5); */
 
-	--bgColor: #424242;
+	--bgColor: #111118;
 	--innerMenuBgColor: #111118;
 	--lightInnerMenuHoverBgColor: #292945;
 
@@ -18,16 +18,16 @@
 	--inputFontColor: #cc5af2;
 
 	--fontColor: #cc5af2;
-	--fontWeightedColor: #d3d3d3;
+	--fontWeightedColor: #111118;
 	--fontWeakenedColor: #8a8a8a;
 
 	--buttonFontColor: #bdbdbd;
 	--buttonBgColor: #494949;
 	--buttonActiveBgColor: #757575;
-	--buttonHoverBgColor: #494949;
+	--buttonHoverBgColor: #111118;
 	--buttonHoverFontColor: #dfdfdf;
 
-	--borderColor: #616161;
+	--borderColor: #111118;
 }
 
 html,
