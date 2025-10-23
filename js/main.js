@@ -53,6 +53,7 @@ let listeners
 window.onload = async function () {
 	await init()
 	loading = true
+	loadSongFromUrlParameter()
 
 	//	loadSongFromURL("http://www.piano-midi.de/midis/brahms/brahms_opus1_1_format0.mid")
 }
@@ -68,6 +69,10 @@ async function init() {
 	loadJson("./js/data/exampleSongs.json", json =>
 		ui.setExampleSongs(JSON.parse(json))
 	)
+	const urlParams = new URLSearchParams(window.location.search)
+	if (urlParams.has('midi')) {
+		return
+	}
 }
 
 let render
@@ -85,4 +90,24 @@ async function loadStartingSong() {
 	FileLoader.loadSongFromURL(url, (response, fileName) =>
 		getPlayer().loadSong(response, fileName, "Mozart - Turkish March")
 	) // Local: "../mz_331_3.mid")
+}
+function loadSongFromUrlParameter() {
+	const urlParams = new URLSearchParams(window.location.search)
+	const midiUrl = urlParams.get('midi')
+	const songName = urlParams.get('name')
+	
+	if (midiUrl) {
+		const decodedUrl = decodeURIComponent(midiUrl)
+		console.log("Loading MIDI from URL:", decodedUrl)
+		
+		setTimeout(() => {
+			FileLoader.loadSongFromURL(
+				decodedUrl,
+				(response, fileName) => {
+					const displayName = songName || fileName || "Song from URL"
+					getPlayer().loadSong(response, fileName, displayName)
+				}
+			)
+		}, 500)
+	}
 }
