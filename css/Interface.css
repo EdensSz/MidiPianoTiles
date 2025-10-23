@@ -10,7 +10,7 @@
 	--buttonHoverBgColor: #c9c9c9;
 	--borderColor: rgba(0, 0, 0, 0.5); */
 
-	--bgColor: ##272735;
+	--bgColor: #131321;
 	--innerMenuBgColor: ##272735;
 	--lightInnerMenuHoverBgColor: #292945;
 
@@ -22,9 +22,9 @@
 	--fontWeakenedColor: #8a8a8a;
 
 	--buttonFontColor: #bdbdbd;
-	--buttonBgColor: #2ed4e0;
+	--buttonBgColor: #272735;
 	--buttonActiveBgColor: #757575;
-	--buttonHoverBgColor: ##272735;
+	--buttonHoverBgColor: #ffff;
 	--buttonHoverFontColor: #dfdfdf;
 
 	--borderColor: #111118;
