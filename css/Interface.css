@@ -11,13 +11,13 @@
 	--borderColor: rgba(0, 0, 0, 0.5); */
 
 	--bgColor: #424242;
-	--innerMenuBgColor: #424242;
-	--lightInnerMenuHoverBgColor: #4e4e4e;
+	--innerMenuBgColor: #111118;
+	--lightInnerMenuHoverBgColor: #292945;
 
 	--inputBgColor: #757575;
-	--inputFontColor: #eeeeee;
+	--inputFontColor: #cc5af2;
 
-	--fontColor: #bdbdbd;
+	--fontColor: #cc5af2;
 	--fontWeightedColor: #d3d3d3;
 	--fontWeakenedColor: #8a8a8a;
 
