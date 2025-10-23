@@ -1,0 +1,286 @@
+/* ========================================
+   CUSTOMISATION PIANOMAKER - STYLES
+   ======================================== */
+
+/* ========================================
+   1. MASQUER LE TITRE DE LA CHANSON
+   ======================================== */
+
+/* Masquer le titre affiché en haut */
+.trackName,
+.songTitle,
+.currentSongTitle,
+h1.songName,
+.song-info-title {
+	display: none !important;
+}
+
+/* Si le titre est dans un autre élément, inspecte et ajoute le sélecteur ici */
+/* Exemple : */
+/* .votre-classe-titre {
+	display: none !important;
+} */
+
+/* ========================================
+   2. COULEUR DE FOND DE LA BARRE DE CONTRÔLE
+   ======================================== */
+
+/* Barre principale avec les boutons */
+.navbar,
+.control-bar,
+.player-controls {
+	background-color: #111118 !important;
+}
+
+/* Si c'est un autre élément, essaye ces sélecteurs : */
+.navbar {
+	background-color: #111118 !important;
+}
+
+/* Container des boutons */
+.btn-group,
+.control-group {
+	background-color: transparent !important;
+}
+
+/* ========================================
+   3. IMAGE DE FOND DERRIÈRE LES NOTES
+   ======================================== */
+
+/* Canvas principal ou container du piano roll */
+body {
+	background: #111118;
+}
+
+/* Ajouter l'image de fond derrière les notes */
+#canvas,
+.piano-roll,
+.note-canvas,
+canvas {
+	background-image: url('https://d7ea70475c31280864ef41a39ccbf430.cdn.bubble.io/f1761225236330x267189328440356160/PIANOMAKER.ART.png') !important;
+	background-size: contain !important;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-color: #111118 !important;
+}
+
+/* Rendre l'image semi-transparente pour ne pas gêner */
+#canvas::before,
+.piano-roll::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url('../img/pianomaker-logo-bg.png');
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	opacity: 0.1; /* Logo très transparent */
+	pointer-events: none;
+	z-index: 0;
+}
+
+/* Alternative : Mettre le logo en filigrane */
+body::after {
+	content: '';
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 300px;
+	height: 300px;
+	background-image: url('../img/pianomaker-logo-bg.png');
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	opacity: 0.05; /* Très transparent */
+	pointer-events: none;
+	z-index: 0;
+}
+
+/* ========================================
+   4. COULEURS DES BOUTONS - VIOLET #cc5af2
+   ======================================== */
+
+/* Textes des labels (Master Volume, Speed, etc.) */
+.control-label,
+label,
+.volume-label,
+.speed-label,
+.setting-label {
+	color: #cc5af2 !important;
+	font-weight: 500;
+}
+
+/* Textes dans les boutons */
+.btn,
+button {
+	color: #cc5af2 !important;
+}
+
+/* Boutons au survol */
+.btn:hover,
+button:hover {
+	color: #e680ff !important;
+	background-color: rgba(204, 90, 242, 0.1) !important;
+}
+
+/* Bouton sélectionné/actif */
+.btn.selected,
+.btn.active,
+button.selected,
+button.active {
+	background-color: rgba(204, 90, 242, 0.2) !important;
+	color: #cc5af2 !important;
+	border-color: #cc5af2 !important;
+}
+
+/* Icônes des boutons (Play, Pause, etc.) */
+.glyphicon,
+.icon,
+.btn-icon,
+svg {
+	color: #cc5af2 !important;
+	fill: #cc5af2 !important;
+}
+
+/* Sliders et inputs */
+input[type="range"] {
+	accent-color: #cc5af2 !important;
+}
+
+input[type="number"],
+input[type="text"],
+select {
+	color: #cc5af2 !important;
+	border-color: #cc5af2 !important;
+	background-color: rgba(204, 90, 242, 0.1) !important;
+}
+
+/* Progress bar */
+#progressBarCanvas {
+	background-color: #1a1a20 !important;
+}
+
+.progress-bar-fill {
+	background-color: #cc5af2 !important;
+}
+
+/* ========================================
+   5. AJUSTEMENTS COMPLÉMENTAIRES
+   ======================================== */
+
+/* Fond général plus sombre */
+body {
+	background-color: #0a0a0f !important;
+}
+
+/* Menus et dropdowns */
+.dropdown-menu,
+.menu,
+.panel {
+	background-color: #111118 !important;
+	border-color: #cc5af2 !important;
+}
+
+.dropdown-item,
+.menu-item {
+	color: #cc5af2 !important;
+}
+
+.dropdown-item:hover,
+.menu-item:hover {
+	background-color: rgba(204, 90, 242, 0.2) !important;
+}
+
+/* Scrollbars personnalisées */
+::-webkit-scrollbar {
+	width: 10px;
+	background: #111118;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #cc5af2;
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #e680ff;
+}
+
+/* ========================================
+   6. BOUTON DE MODIFICATION DU TEMPO
+   ======================================== */
+
+/* Style spécial pour le bouton de tempo */
+#speedControl,
+.tempo-control,
+.speed-slider {
+	position: relative;
+}
+
+/* Indicateur de limite atteinte */
+.tempo-limit-indicator {
+	position: absolute;
+	top: -25px;
+	left: 0;
+	background: rgba(204, 90, 242, 0.9);
+	color: white;
+	padding: 5px 10px;
+	border-radius: 5px;
+	font-size: 12px;
+	animation: fadeInOut 2s;
+	pointer-events: none;
+}
+
+@keyframes fadeInOut {
+	0% { opacity: 0; transform: translateY(10px); }
+	20% { opacity: 1; transform: translateY(0); }
+	80% { opacity: 1; transform: translateY(0); }
+	100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Bouton désactivé pour les guests */
+.tempo-locked {
+	opacity: 0.5;
+	cursor: not-allowed !important;
+	position: relative;
+}
+
+.tempo-locked::after {
+	content: '🔒';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 20px;
+	pointer-events: none;
+}
+
+/* ========================================
+   7. STATS DISPLAY (optionnel - pour affichage)
+   ======================================== */
+
+.stats-display {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	background: rgba(17, 17, 24, 0.9);
+	border: 1px solid #cc5af2;
+	border-radius: 5px;
+	padding: 10px;
+	color: #cc5af2;
+	font-size: 12px;
+	z-index: 1000;
+}
+
+.stats-display .stat-item {
+	margin: 5px 0;
+}
+
+.stats-display .stat-label {
+	font-weight: bold;
+	color: #e680ff;
+}
