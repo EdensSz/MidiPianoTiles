@@ -58,6 +58,31 @@
         async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
-
+setTimeout(function() {
+    // Les sliders "undefinedSlider" sont probablement le tempo
+    const sliders = document.querySelectorAll('input[id="undefinedSlider"]');
+    
+    // Prendre le PREMIER (généralement le tempo)
+    const tempoSlider = sliders[0];
+    
+    if (tempoSlider) {
+        // Désactiver
+        tempoSlider.disabled = true;
+        tempoSlider.style.opacity = '0.5';
+        tempoSlider.style.cursor = 'not-allowed';
+        
+        // Pop-up au clic
+        tempoSlider.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('🔒 Créez un compte pour modifier le tempo !\n\nPassez à Premium pour un accès illimité.');
+        });
+        
+        // Empêcher aussi le drag
+        tempoSlider.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            alert('🔒 Créez un compte pour modifier le tempo !');
+        });
+    }
+}, 2000);
 </body>
 </html>
