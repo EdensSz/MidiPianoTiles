@@ -60,26 +60,50 @@
 <body>
 <script>
 setTimeout(function() {
-    const tempoSlider = document.getElementById('playedNoteFalloffSpeedSlider');
+    console.log('Blocage du tempo...');
     
-    if (tempoSlider) {
-        // Désactiver
-        tempoSlider.disabled = true;
-        tempoSlider.style.opacity = '0.5';
-        tempoSlider.style.cursor = 'not-allowed';
-        
-        // Pop-up au clic
-        tempoSlider.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('🔒 Créez un compte pour modifier le tempo !\n\nPassez à Premium pour un accès illimité.');
-        });
-        
-        // Empêcher le drag
-        tempoSlider.addEventListener('mousedown', function(e) {
-            e.preventDefault();
+    // Bloquer les boutons + et -
+    const speedUp = document.getElementById('speedUp');
+    const speedDown = document.getElementById('speedDown');
+    
+    // Bloquer l'input (essayer plusieurs IDs possibles)
+    const speedInput = document.querySelector('input[type="number"]') || 
+                       document.querySelector('input[type="text"]');
+    
+    // Fonction pour bloquer un bouton
+    function blockButton(btn, name) {
+        if (btn) {
+            btn.style.opacity = '0.5';
+            btn.style.cursor = 'not-allowed';
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                alert('🔒 Créez un compte pour modifier le tempo !\n\nPassez à Premium pour un accès illimité.');
+                return false;
+            }, true);
+            console.log(name + ' bloqué ✓');
+        }
+    }
+    
+    blockButton(speedUp, 'speedUp');
+    blockButton(speedDown, 'speedDown');
+    
+    // Bloquer l'input
+    if (speedInput) {
+        speedInput.readOnly = true;
+        speedInput.style.opacity = '0.5';
+        speedInput.style.cursor = 'not-allowed';
+        speedInput.addEventListener('focus', function(e) {
+            this.blur();
             alert('🔒 Créez un compte pour modifier le tempo !');
         });
+        speedInput.addEventListener('input', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        console.log('Input bloqué ✓');
     }
+    
 }, 2000);
 </script>
 </body>
