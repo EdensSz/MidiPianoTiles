@@ -58,53 +58,55 @@
         async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
+<body>
 <script>
 setTimeout(function() {
     console.log('Blocage du tempo...');
     
-    // Bloquer les boutons + et -
-    const speedUp = document.getElementById('speedUp');
-    const speedDown = document.getElementById('speedDown');
+    // Bloquer les boutons 11 et 12
+    const buttons = document.querySelectorAll('button, .btn');
+    const btn11 = buttons[11];
+    const btn12 = buttons[12];
     
-    // Bloquer l'input (essayer plusieurs IDs possibles)
-    const speedInput = document.querySelector('input[type="number"]') || 
-                       document.querySelector('input[type="text"]');
-    
-    // Fonction pour bloquer un bouton
-    function blockButton(btn, name) {
-        if (btn) {
-            btn.style.opacity = '0.5';
-            btn.style.cursor = 'not-allowed';
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                alert('🔒 Créez un compte pour modifier le tempo !\n\nPassez à Premium pour un accès illimité.');
-                return false;
-            }, true);
-            console.log(name + ' bloqué ✓');
-        }
+    if (btn11) {
+        btn11.style.opacity = '0.5';
+        btn11.style.cursor = 'not-allowed';
+        btn11.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            alert('🔒 Créez un compte pour modifier le tempo !');
+        }, true);
+        console.log('Bouton 11 bloqué');
     }
     
-    blockButton(speedUp, 'speedUp');
-    blockButton(speedDown, 'speedDown');
+    if (btn12) {
+        btn12.style.opacity = '0.5';
+        btn12.style.cursor = 'not-allowed';
+        btn12.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            alert('🔒 Créez un compte pour modifier le tempo !');
+        }, true);
+        console.log('Bouton 12 bloqué');
+    }
     
-    // Bloquer l'input
-    if (speedInput) {
-        speedInput.readOnly = true;
-        speedInput.style.opacity = '0.5';
-        speedInput.style.cursor = 'not-allowed';
-        speedInput.addEventListener('focus', function(e) {
+    // Bloquer l'input 54
+    const inputs = document.querySelectorAll('input');
+    const input54 = inputs[54];
+    
+    if (input54) {
+        input54.readOnly = true;
+        input54.style.opacity = '0.5';
+        input54.style.cursor = 'not-allowed';
+        input54.addEventListener('focus', function() {
             this.blur();
             alert('🔒 Créez un compte pour modifier le tempo !');
         });
-        speedInput.addEventListener('input', function(e) {
-            e.preventDefault();
-            return false;
-        });
-        console.log('Input bloqué ✓');
+        console.log('Input 54 bloqué');
     }
     
 }, 2000);
 </script>
+</body>
 </body>
 </html>
