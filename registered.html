@@ -58,6 +58,65 @@
         async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
-
+<body>
+<script>
+setTimeout(function() {
+    console.log('Système de quota tempo (10 max)...');
+    
+    // Récupérer le compteur
+    let tempoChanges = parseInt(localStorage.getItem('tempoChanges') || '0');
+    
+    // Sélectionner les boutons et input
+    const buttons = document.querySelectorAll('button, .btn');
+    const btn11 = buttons[11];
+    const btn12 = buttons[12];
+    const inputs = document.querySelectorAll('input');
+    const input54 = inputs[54];
+    
+    // Fonction pour gérer un changement
+    function handleTempoChange(e) {
+        if (tempoChanges >= 10) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            alert('⚠️ Vous avez utilisé vos 10 modifications gratuites !\n\nPassez à Premium pour un accès illimité.');
+            return false;
+        }
+        
+        // Incrémenter le compteur
+        tempoChanges++;
+        localStorage.setItem('tempoChanges', tempoChanges);
+        
+        const remaining = 10 - tempoChanges;
+        
+        if (remaining === 0) {
+            // Bloquer tout après ce changement
+            setTimeout(() => {
+                if (btn11) {
+                    btn11.style.opacity = '0.5';
+                    btn11.style.cursor = 'not-allowed';
+                }
+                if (btn12) {
+                    btn12.style.opacity = '0.5';
+                    btn12.style.cursor = 'not-allowed';
+                }
+                if (input54) {
+                    input54.readOnly = true;
+                    input54.style.opacity = '0.5';
+                }
+            }, 100);
+            alert('⚠️ C\'était votre dernière modification gratuite !\n\nPassez à Premium pour un accès illimité.');
+        } else {
+            alert(`✓ Tempo modifié !\n\n${remaining} modification${remaining > 1 ? 's' : ''} restante${remaining > 1 ? 's' : ''}.`);
+        }
+        
+        console.log('Modifications utilisées:', tempoChanges + '/10');
+    }
+    
+    // Vérifier si déjà bloqué
+    if (tempoChanges >= 10) {
+        console.log('Quota déjà atteint !');
+        
+        if (btn11) {
+            btn11.style.opacity = '0.5';
 </body>
 </html>
