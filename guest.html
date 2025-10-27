@@ -59,82 +59,56 @@
 </head>
 <body>
 <script>
-	// CHARGER LE MIDI DEPUIS L'URL
-setTimeout(function() {
-    // Lire les paramètres URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const midiUrl = urlParams.get('midi') || urlParams.get('midiurl');
-    
-    if (midiUrl) {
-        console.log('Chargement du MIDI depuis URL:', midiUrl);
+	// ATTENDRE QUE LE MIDI SOIT COMPLÈTEMENT CHARGÉ
+window.addEventListener('load', function() {
+    // Attendre encore 3 secondes après le chargement complet
+    setTimeout(function() {
+        console.log('Page chargée, blocage du tempo...');
         
-        // Attendre que le player soit chargé
-        const waitForPlayer = setInterval(function() {
-            // Chercher le bouton de chargement ou la fonction de chargement
-            // (Dépend de ton code, mais généralement il y a une fonction loadSong ou loadMidi)
-            
-            if (window.loadSongFromURL) {
-                window.loadSongFromURL(midiUrl);
-                clearInterval(waitForPlayer);
-            } else if (window.Player && window.Player.loadSong) {
-                window.Player.loadSong(midiUrl);
-                clearInterval(waitForPlayer);
-            } else {
-                // Essayer de déclencher le chargement via l'input file
-                console.log('Player pas encore prêt, on attend...');
-            }
-        }, 500);
+        const buttons = document.querySelectorAll('button, .btn');
+        const btn11 = buttons[11];
+        const btn12 = buttons[12];
         
-        // Timeout après 10 secondes
-        setTimeout(() => clearInterval(waitForPlayer), 10000);
-    }
-}, 1000);
-setTimeout(function() {
-    console.log('Blocage du tempo...');
-    
-    // Bloquer les boutons 11 et 12
-    const buttons = document.querySelectorAll('button, .btn');
-    const btn11 = buttons[11];
-    const btn12 = buttons[12];
-    
-    if (btn11) {
-        btn11.style.opacity = '0.5';
-        btn11.style.cursor = 'not-allowed';
-        btn11.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            alert('🔒 Login to modify the tempo!');
-        }, true);
-        console.log('Bouton 11 bloqué');
-    }
-    
-    if (btn12) {
-        btn12.style.opacity = '0.5';
-        btn12.style.cursor = 'not-allowed';
-        btn12.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            alert('🔒 Login to modify the tempo !');
-        }, true);
-        console.log('Bouton 12 bloqué');
-    }
-    
-    // Bloquer l'input 54
-    const inputs = document.querySelectorAll('input');
-    const input54 = inputs[54];
-    
-    if (input54) {
-        input54.readOnly = true;
-        input54.style.opacity = '0.5';
-        input54.style.cursor = 'not-allowed';
-        input54.addEventListener('focus', function() {
-            this.blur();
-            alert('🔒 Login to modify the tempo !');
-        });
-        console.log('Input 54 bloqué');
-    }
-    
-}, 2000);
+        if (btn11) {
+            btn11.style.opacity = '0.5';
+            btn11.style.cursor = 'not-allowed';
+            btn11.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                alert('🔒 Login to modify the tempo!');
+                return false;
+            }, true);
+            console.log('✓ Bouton + bloqué');
+        }
+        
+        if (btn12) {
+            btn12.style.opacity = '0.5';
+            btn12.style.cursor = 'not-allowed';
+            btn12.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                alert('🔒 Login to modify the tempo!');
+                return false;
+            }, true);
+            console.log('✓ Bouton - bloqué');
+        }
+        
+        const inputs = document.querySelectorAll('input');
+        const input54 = inputs[54];
+        
+        if (input54) {
+            input54.readOnly = true;
+            input54.style.opacity = '0.5';
+            input54.style.cursor = 'not-allowed';
+            input54.addEventListener('focus', function() {
+                this.blur();
+                alert('🔒 Login to modify the tempo!');
+            });
+            console.log('✓ Input bloqué');
+        }
+        
+    }, 3000);
+});
 </script>
 </body>
 </body>
