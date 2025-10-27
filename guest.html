@@ -60,6 +60,36 @@
 <body>
 <body>
 <script>
+	// CHARGER LE MIDI DEPUIS L'URL
+setTimeout(function() {
+    // Lire les paramètres URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const midiUrl = urlParams.get('midi') || urlParams.get('midiurl');
+    
+    if (midiUrl) {
+        console.log('Chargement du MIDI depuis URL:', midiUrl);
+        
+        // Attendre que le player soit chargé
+        const waitForPlayer = setInterval(function() {
+            // Chercher le bouton de chargement ou la fonction de chargement
+            // (Dépend de ton code, mais généralement il y a une fonction loadSong ou loadMidi)
+            
+            if (window.loadSongFromURL) {
+                window.loadSongFromURL(midiUrl);
+                clearInterval(waitForPlayer);
+            } else if (window.Player && window.Player.loadSong) {
+                window.Player.loadSong(midiUrl);
+                clearInterval(waitForPlayer);
+            } else {
+                // Essayer de déclencher le chargement via l'input file
+                console.log('Player pas encore prêt, on attend...');
+            }
+        }, 500);
+        
+        // Timeout après 10 secondes
+        setTimeout(() => clearInterval(waitForPlayer), 10000);
+    }
+}, 1000);
 setTimeout(function() {
     console.log('Blocage du tempo...');
     
